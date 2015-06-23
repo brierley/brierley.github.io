@@ -31,10 +31,10 @@ exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.
 
 # Site owner
 owner:
-  name: David Nirchi
+  name: brierley+partners
   avatar: bio-photo.jpg
   email: dnirchi@brierley.com
-  disqus-shortname: bp-tech-blog
+  disqus-shortname: bptechblog
   twitter: #username
   facebook: #username
   github: #dnirchi
