@@ -3,7 +3,7 @@
 title: Solutions Engineering
 locale: en_US
 description: Our latest innovations...
-logo: site-logo.png
+logo: bp-logo.png
 search: true
 url: http://brierley.github.io
 
@@ -31,13 +31,13 @@ exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.
 
 # Site owner
 owner:
-  name: Your Name
+  name: David Nirchi
   avatar: bio-photo.jpg
-  email: you@email.com
-  disqus-shortname:
+  email: dnirchi@brierley.com
+  disqus-shortname: bp-tech-blog
   twitter: #username
   facebook: #username
-  github: #username
+  github: #dnirchi
   stackexchange: #http://stackoverflow.com/users/123456/username
   linkedin: #username
   instagram: #username
