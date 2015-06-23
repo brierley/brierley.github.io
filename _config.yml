@@ -18,6 +18,10 @@ sass:
 gems:
   - jekyll-sitemap
 
+sections: [
+    ['test', 'Test']
+]
+
 kramdown:
   auto_ids: true
   footnote_nr: 1
