@@ -5,8 +5,8 @@ locale: en_US
 description: Collaborative Innovation
 logo: bp_logo_dark.png
 search: true
-# url: http://localhost:4000
-url: http://brierley.github.io
+url: http://localhost:4000
+# url: http://brierley.github.io
 
 # Jekyll configuration
 
