@@ -109,7 +109,15 @@ In **_Part I_** of our tutorial, we'll walk through getting your development env
 
 ## Getting Started
 
-Okay, enough talk. Let's get to work on building and packaging our full-stack application with the help of Docker.
+Let's get to work on building and packaging our full-stack application with the help of Docker. First we'll need to install a few things...
+
+### TL;DR
+
+[**`Installing Docker`**](#docker)
+
+[**`Installing Meteor`**](#meteor)
+
+<a name="docker"></a>
 
 ### 1. Installing Docker
 
@@ -139,13 +147,13 @@ As with the Mac installation, both the Kitematic and Boot2Docker options will in
 
 If you run into trouble with either installation approach, Docker has great documentation <a href="https://docs.docker.com/installation/mac/" target="_blank">**here**</a>.
 
-##### Option 1 - Kitematic (alpha-only)
+##### Option 1 - Boot2Docker (recommended)
 
-Download the latest Kitematic installer <a href="https://github.com/kitematic/kitematic/releases/" target="_blank">**here**</a>. At the time of this writing, the latest version of the installer file is called <a href="https://github.com/kitematic/kitematic/releases/download/v0.7.4/KitematicSetup-0.7.4-Windows-Alpha.exe" target="_blank">_**KitematicSetup-0.7.4-Windows-Alpha.exe**_</a>.
+Download the latest Doot2Docker Windows installer (docker-install.exe) <a href="https://github.com/boot2docker/windows-installer/releases" target="_blank">**here**</a>, which will install the Docker Client for Windows, VirtualBox, Git for Windows (MSYS-git), the boot2docker Linux ISO, and the Boot2Docker management tool. Installation instructions can be found <a href="https://docs.docker.com/installation/windows/" target="_blank">**here**</a>.
 
-##### Option 2 - Boot2Docker (recommended)
+##### Option 2 - Kitematic (alpha-only)
 
-Download the latest Doot2Docker install package (Boot2Docker-*.pkg) <a href="https://github.com/boot2docker/windows-installer/releases" target="_blank">**here**</a>, which will install the Docker Client for Windows, VirtualBox, Git for Windows (MSYS-git), the boot2docker Linux ISO, and the Boot2Docker management tool.
+The Windows version Kitematic is still in alpha at the time of this writing, so we cannot safely recommend it. If you're feeling lucky, you can download the latest Kitematic installer <a href="https://github.com/kitematic/kitematic/releases/" target="_blank">**here**</a>. The latest version of the installer file is called <a href="https://github.com/kitematic/kitematic/releases/download/v0.7.4/KitematicSetup-0.7.4-Windows-Alpha.exe" target="_blank">_**KitematicSetup-0.7.4-Windows-Alpha.exe**_</a>.
 
 ### 2. Taking Docker for a Spin
 
@@ -246,4 +254,107 @@ For more examples and ideas, visit:
 
 ##### What just happened?
 
-By issuing this command, we asked Docker to run the <a href="https://docs.docker.com/docker-hub/official_repos/" target="_blank">**official**</a> _hello-world_ Docker image. As we can see from the command output above, we did not have the image so Docker automatically initiated a download/pull request from the hello-world Docker Hub repository.
+By issuing this command, we asked Docker to run the <a href="https://docs.docker.com/docker-hub/official_repos/" target="_blank">**official**</a> _hello-world_ Docker image. As we can see from the command output above, we did not have the image so Docker automatically initiated a download request of the latest hello-world image from the Docker Hub repository. The hello-world image is a special official Docker image used for validating Docker installations.
+
+The output also suggests we _try something more ambitious_ - let's take them up on that and run the official Ubuntu Docker container by issuing the following command:
+
+{% highlight bash %}
+$ docker run -it ubuntu bash
+{% endhighlight %}
+
+> We specified a couple options for the **run** command, namely _**`i`**_ and _**`t`**_, which can be combined and written as _**`-it`**_ or separately as _**`-i -t`**_. These options tell Docker to open an interactive (-i) terminal (-t) window when running the Ubuntu container.
+
+You should see output that looks something like this. Notice the terminal prompt - we're now logged into the container as _**root**_. Also notice we did not have the Ubuntu image locally, so Docker pulled it down from the Ubuntu Docker Hub for us:
+
+{% highlight bash %}
+
+docker@boot2docker:~$ docker run -it ubuntu bash
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from ubuntu
+83e4dde6b9cf: Pull complete
+b670fb0c7ecd: Pull complete
+29460ac93442: Pull complete
+d2a0ecffe6fa: Already exists
+ubuntu:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
+Digest: sha256:cb90b1a107073ab3e17271e45a6177b23f548b44157d88d955b7e8bcdbcfd14a
+Status: Downloaded newer image for ubuntu:latest
+root@d4d426660101:/#
+
+{% endhighlight %}
+
+Let's go ahead and stop running the container and get back to our host (Boot2Docker) terminal by typing in _**exit**_.
+
+{% highlight bash %}
+root@d4d426660101:/# exit
+{% endhighlight %}
+
+> Note: You can always stop and get out of any container by entering _**exit**_ into the container's terminal window.
+
+#### Some Useful Commands
+
+Before we cover off on our introduction to Docker, let's go over a few more useful commands.
+
+To see a list of all available Docker commands, enter enter the following into the Boot2Docker terminal window.
+
+{% highlight bash %}
+$ docker --help
+{% endhighlight %}
+
+> Here we see the complete list of commands along with a brief description of what each command does.
+
+You can also go a level deeper, for example, and get help specifically on the _**run**_ command by entering the following:
+
+{% highlight bash %}
+$ docker run --help
+{% endhighlight %}
+
+You can see a list of running containers by entering the following. Note: You won't see any results because we don't have any running containers at this point.
+
+{% highlight bash %}
+$ docker ps
+{% endhighlight %}
+
+To see a historical list of all the containers we've run in the past, enter the following command.
+
+{% highlight bash %}
+$ docker ps -a
+{% endhighlight %}
+
+You should see something like this:
+
+{% highlight text %}
+
+docker@boot2docker:~$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
+63aba2be4965        hello-world         "/hello"            19 minutes ago      Exited (0) 19 minutes ago                       berserk_archimedes
+d4d426660101        ubuntu              "bash"              5 hours ago         Exited (0) 19 minutes ago                       tender_noyce
+docker@boot2docker:~$
+
+{% endhighlight %}
+
+Let's start with a clean slate before proceeding. Enter the following commands separately.
+
+{% highlight bash %}
+$ docker rm -f `docker ps -aq`
+$ docker rmi -f `docker images -q`
+{% endhighlight %}
+
+> These commands will remove all containers and images. Now, if you enter the **`docker ps -a`** command again, you will not get any results.
+
+<a name="meteor"></a>
+
+### 2. Installing Meteor
+
+Let's get re-focused on what this tutorial is really about - harnessing the power of Docker as a development and distribution platform. For that, we'll need Meteor.
+
+Mac OS X
+
+If you're on a Mac, simply open up a terminal window and enter the following:
+
+{% highlight bash %}
+curl https://install.meteor.com/ | sh
+{% endhighlight %}
+
+Windows
+
+If you're using a Windows machine, you can download the official Meteor installer <a href="https://install.meteor.com/windows" target="_blank">**here**</a>.
