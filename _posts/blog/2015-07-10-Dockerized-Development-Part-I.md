@@ -345,16 +345,26 @@ $ docker rmi -f `docker images -q`
 
 ### 2. Installing Meteor
 
-Let's get re-focused on what this tutorial is really about - harnessing the power of Docker as a development and distribution platform. For that, we'll need Meteor.
+Let's get re-focused on what this tutorial is really about - harnessing the power of Docker as an application development and distribution platform. For that, we'll need Meteor.
 
-Mac OS X
+> For help on getting Meteor up and running, go <a href="http://docs.meteor.com/#/full/" target="_blank">**here**</a>.
 
-If you're on a Mac, simply open up a terminal window and enter the following:
+#### Mac OS X
+
+If you're on a Mac, simply open up a terminal window and enter the following to install Meteor:
 
 {% highlight bash %}
 curl https://install.meteor.com/ | sh
 {% endhighlight %}
 
-Windows
+#### Windows
 
 If you're using a Windows machine, you can download the official Meteor installer <a href="https://install.meteor.com/windows" target="_blank">**here**</a>.
+
+### 3. Creating Your First Meteor App
+
+You should now have both Docker and Meteor installed. Next, we'll start with creating a basic Meteor app to walk through the basics of wrapping our app with a Docker container.
+
+
+
+### 4. Building a Docker Image For Your App
