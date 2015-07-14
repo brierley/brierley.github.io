@@ -365,6 +365,13 @@ If you're using a Windows machine, you can download the official Meteor installe
 
 You should now have both Docker and Meteor installed. Next, we'll start with creating a basic Meteor app to walk through the basics of wrapping our app with a Docker container.
 
+To retrieve the IP address of a running container, enter the following command:
+
+{% highlight bash %}
+docker inspect <container_name> | awk -F '"' '/IPAdd/ {print $4}'
+{% endhighlight %}
+
+
 
 
 ### 4. Building a Docker Image For Your App
